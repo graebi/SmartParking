@@ -15,9 +15,8 @@ import android.widget.TextView;
 
 import javax.security.auth.login.LoginException;
 
-//irgnedow now ein faheler
-
-public class Login extends ActionBarActivity implements View.OnClickListener {
+//original public class Login extends ActionBarActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity implements View.OnClickListener {
 
     //Variable to hold value from activity_login.xml form
     Button bLogin;
