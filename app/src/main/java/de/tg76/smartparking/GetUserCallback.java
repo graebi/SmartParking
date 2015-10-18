@@ -1,9 +1,10 @@
 package de.tg76.smartparking;
 
 /**
- * Created by adm_toto on 05/10/2015.
- */
+ * This class is used to inform any activity when background process is finished */
+
+//Inform the activity when the server request is finished
 interface GetUserCallback {
 
-    public abstract void done(User returnedUser);
+    void done(User returnedUser);
 }

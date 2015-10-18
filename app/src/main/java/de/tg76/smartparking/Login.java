@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import javax.security.auth.login.LoginException;
 
-//original public class Login extends ActionBarActivity implements View.OnClickListener {
+//original-- public class Login extends ActionBarActivity implements View.OnClickListener {
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     //Variable to hold value from activity_login.xml form
@@ -29,7 +29,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login); //starts the activity_login.xml
 
         //Assign ID to variable from activity_login.xml form
         etUsername = (EditText) findViewById(R.id.etUsername);
@@ -42,10 +42,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         tvRegisterLink.setOnClickListener(this);
 
         userLocalStore = new UserLocalStore(this);
-
     }
 
     @Override
+    //When bLogin or tvRegisterLink is clicked
     public void onClick(View v) {
         //Check ID value
         switch (v.getId()){
@@ -64,7 +64,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             case R.id.tvRegisterLink:
                 startActivity(new Intent(this,Register.class));
                 break;
-
         }
     }
 
@@ -84,7 +83,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private void showErrorMessage(){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Login.this);
-        dialogBuilder.setMessage("Incorrect uer details");
+        dialogBuilder.setMessage("Incorrect user details");
         dialogBuilder.setPositiveButton("OK", null);
         dialogBuilder.show();
     }

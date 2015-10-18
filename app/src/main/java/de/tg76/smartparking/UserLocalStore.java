@@ -11,7 +11,7 @@ public class UserLocalStore {
 
     //Static variable for holding user data
     public static final String SP_NAME = "userDetails";
-    SharedPreferences userLocalDatabase;
+    SharedPreferences userLocalDatabase; //allows to store data on the phone
 
     //Constructor
     //Get context of current state of the SP_NAME file which stores the user details
@@ -29,7 +29,7 @@ public class UserLocalStore {
         spEditor.commit();
     }
 
-    //Function getting data of user which is logged in - returns user
+    //Function retrieving attributes of user which is stored on the local database
     public  User getLoggedInUser(){
         String name = userLocalDatabase. getString("name", "");
         String email = userLocalDatabase.getString("email", "");
@@ -37,11 +37,10 @@ public class UserLocalStore {
         String password = userLocalDatabase.getString("password","");
 
         //Creating new user and return
-        User storedUser = new User(name, email,username,password );
-        return storedUser;
+        return new User(name, email,username,password );
     }
 
-    //Function to set loggedIn if user is logged in
+    //Function to set loggedIn if user is logged on to the mobile
     public void setUserLoggedIn(boolean loggedIn){
         SharedPreferences.Editor spEditor = userLocalDatabase.edit();
         spEditor.putBoolean("loggedIn",loggedIn);
@@ -50,13 +49,13 @@ public class UserLocalStore {
 
     //Function if user is logged in or out to application
     public boolean getUserLoggedIn(){
-        if(userLocalDatabase.getBoolean("loggedIn",false) == true){
-            return true;
-        }else{
+        //Set default loggedIn value to false
+        if(userLocalDatabase.getBoolean("loggedIn",false) == true) return true;
+        else{
             return false;
         }
     }
-    //Function to clear user data
+    //Function to clear user data on SharedPreferences
     public void clearUserData(){
         SharedPreferences.Editor spEditor = userLocalDatabase.edit();
         spEditor.clear();

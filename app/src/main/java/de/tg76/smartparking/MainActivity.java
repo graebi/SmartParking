@@ -3,15 +3,13 @@ package de.tg76.smartparking;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    //Variable to hold value from activity_register.xml form
+    //Variable to hold values from activity form
     EditText etName, etEmail, etUsername;
     Button bLogout;
     UserLocalStore userLocalStore;
@@ -25,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etName = (EditText) findViewById(R.id.etName);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etUsername = (EditText) findViewById(R.id.etUsername);
+
         bLogout = (Button)findViewById(R.id.bLogout);
 
         //Creating listener for button bLogout
@@ -34,12 +33,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         userLocalStore = new UserLocalStore(this);
     }
 
+    //Anytime the main activity opens -> verify if user is logged on otherwise start Login.class
     @Override
-
     protected void onStart(){
         super.onStart();
         //Check if user is logged in => if so start displayUserDetails function otherwise start Login.class activity
-        if(authentication() == true){
+        if(authentication()){
             displayUserDetails();
         }else{
             startActivity(new Intent(MainActivity.this,Login.class));

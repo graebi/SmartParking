@@ -1,15 +1,14 @@
 package de.tg76.smartparking;
 
 /**
- * Created by adm_toto on 04/10/2015.
- * User details stored on a local file
+ * User class - Creates user and holds attributes of user
  */
 public class User {
 
     //Variable to hold value of user
     String name, username, password, email;
 
-    //Constructor
+    //Constructor when user register
     public User (String name, String email,String username, String password){
         this.name = name;
         this.username = username;
@@ -17,7 +16,7 @@ public class User {
         this.email = email;
     }
 
-    //Constructor
+    //Constructor when user logs on
     public User (String username, String password){
         this.username = username;
         this.password = password;

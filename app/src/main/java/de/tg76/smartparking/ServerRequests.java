@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * Created by adm_toto on 05/10/2015.
+ * Class is used to push and retrieve data from and to DB
  */
 public class ServerRequests {
 
@@ -31,7 +31,7 @@ public class ServerRequests {
     ProgressDialog progressDialog;
     //Connection time in mill sec before disconnect
     public static final int CONNECTION_TIME = 1000*15;
-    public static final String SERVER_ADDRESS = "http://52.17.188.91/";
+    public static final String SERVER_ADDRESS = "http://ec2-52-17-188-91.eu-west-1.compute.amazonaws.com/";
 
     //Constructor
     public ServerRequests(Context context){
@@ -53,14 +53,18 @@ public class ServerRequests {
     public void fetchUserDataInBackground(User user, GetUserCallback callback){
         //Start progress bar
         progressDialog.show();
+        new fetchUserDataAsyncTask(user, callback).execute();
     }
 
-    //Background task
+    //Background task - first void means we are not sending anything to the AsyncTask we use
+    //the constructor for that - the second void is how do we want to receive the progress
+    //from the AsyncTask - just starting the progressDialog - the third void is what the
+    //AsyncTask should return
     public class StoreUserDataAsyncTask extends AsyncTask<Void,Void, Void>{
 
         //Holds user data
         User user;
-        //Interface GetuserCallback
+        //Interface GetUserCallback - inform when finishing background task
         GetUserCallback userCallback;
 
         //Constructor
@@ -85,7 +89,7 @@ public class ServerRequests {
             //Time to wait to receive anything from server
             HttpConnectionParams.setSoTimeout(httpRequestParams, CONNECTION_TIME);
 
-            //Create client to establish HTTP connection
+            //Create client to establish HTTP connection + and make request to server
             HttpClient client = new DefaultHttpClient(httpRequestParams);
             HttpPost post = new HttpPost(SERVER_ADDRESS + "Register.php");
 
@@ -95,26 +99,24 @@ public class ServerRequests {
             }catch (Exception e){
               e.printStackTrace();
             }
-
             return null;
         }
-
         @Override
         //When AsyncTask is finish
         protected void onPostExecute(Void aVoid) {
             //Stop progress bar displayed when AsyncTask is finish
             progressDialog.dismiss();
+            //Inform activity which started process that process is finished
             userCallback.done(null);
-
             super.onPostExecute(aVoid);
         }
     }
 
-    //Returns a user
+    //Returns a user in AsyncTask
     public class fetchUserDataAsyncTask extends AsyncTask<Void,Void, User> {
         //Holds user data
         User user;
-        //Interface GetuserCallback
+        //Interface GetUserCallback
         GetUserCallback userCallback;
 
         //Constructor
@@ -139,42 +141,41 @@ public class ServerRequests {
             HttpClient client = new DefaultHttpClient(httpRequestParams);
             HttpPost post = new HttpPost(SERVER_ADDRESS + "FetchUserData.php");
 
-            User returndUser = null;
+            User returnedUser = null;
             try{
                 post.setEntity(new UrlEncodedFormEntity(dataToSend));
                 //Stores the data fetched from the database
                 HttpResponse httpResponse = client.execute(post);
 
+                //Get the data from the HTTP response
                 HttpEntity entity = httpResponse.getEntity();
+                //Convert data to string
                 String result = EntityUtils.toString(entity);
                 //jObject holds the user data
                 JSONObject jObject = new JSONObject(result);
 
                 if(jObject.length()==0){
-                    returndUser = null;
+                    returnedUser = null;
                 }else {
                     String name = jObject.getString("name");
                     String email = jObject.getString("email");
 
-                    returndUser = new User(name, email, user.username, user.password);
-
+                    returnedUser = new User(name, email, user.username, user.password);
                 }
-
             }catch (Exception e){
                 e.printStackTrace();
             }
-
-            return returndUser;
+            return returnedUser;
         }
 
         @Override
-        //When AsyncTask is finish - returns a user
-        protected void onPostExecute(User returndUser) {
+        //When AsyncTask is finish - return user
+        protected void onPostExecute(User returnedUser) {
             //Stop progress bar displayed when AsyncTask is finish
             progressDialog.dismiss();
-            //Send the returenduser to the done callback
-            userCallback.done(returndUser);
-            super.onPostExecute(returndUser);
+            //Send the returned user to the done callback
+            userCallback.done(returnedUser);
+            super.onPostExecute(returnedUser);
         }
     }
 }

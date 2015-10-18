@@ -34,7 +34,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     //Register customer
     @Override
     public void onClick(View v) {
-        //Check ID value
+        //Check ID value for bRegister
         switch (v.getId()){
             case R.id.bRegister:
                 String name = etName.getText().toString();
@@ -44,6 +44,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
                 //Create instance of user object
                 User user = new User(name,email,username,password);
+
                 //Store user data - calling function
                 registerUser(user);
                 break;
