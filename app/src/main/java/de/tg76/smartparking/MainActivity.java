@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //break;
 
                 //New try
-                startActivity(new Intent(this,Parking.class));
+                startActivity(new Intent(this,SmartParking.class));
                 break;
         }
     }

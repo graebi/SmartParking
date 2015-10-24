@@ -22,6 +22,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 return new Fragment2();
             case 2:
                 return new Fragment3();
+            case 3:
+                return new Fragment4();
             default:
                 return null;
         }

@@ -3,7 +3,6 @@ package de.tg76.smartparking;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -16,7 +15,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
@@ -25,7 +23,7 @@ import java.util.ArrayList;
 /**
  * Class is used to push and retrieve data from and to DB
  */
-public class ServerRequests {
+public class ServerRequestsUser {
 
     //Show loading bar when server request is executed
     ProgressDialog progressDialog;
@@ -34,7 +32,7 @@ public class ServerRequests {
     public static final String SERVER_ADDRESS = "http://ec2-52-17-188-91.eu-west-1.compute.amazonaws.com/";
 
     //Constructor
-    public ServerRequests(Context context){
+    public ServerRequestsUser(Context context){
         //Instantiate dialog progress
         progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);

@@ -62,7 +62,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void authenticate(User user){
-            ServerRequests serverRequest = new ServerRequests(this);
+            ServerRequestsUser serverRequest = new ServerRequestsUser(this);
             serverRequest.fetchUserDataInBackground(user, new GetUserCallback() {
                 @Override
                 public void done(User returnedUser) {

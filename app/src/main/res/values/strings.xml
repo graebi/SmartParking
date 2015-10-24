@@ -8,6 +8,9 @@
     <string name="title_activity_fragment2">Fragment2</string>
     <string name="title_activity_fragment3">Fragment3</string>
     <string name="title_activity_parking">Smart Parking</string>
+    <string name="title_activity_fragment4">Fragment4</string>
+
+    <string name="hello_world">Hello world!</string>
 
 
 

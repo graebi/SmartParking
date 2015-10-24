@@ -26,10 +26,13 @@
             android:name=".Register"
             android:label="@string/title_activity_register" >
         </activity>
-
         <activity
-            android:name=".Parking"
+            android:name=".SmartParking"
             android:label="@string/title_activity_parking" >
+        </activity>
+        <activity
+            android:name=".Fragment4"
+            android:label="@string/title_activity_fragment4" >
         </activity>
     </application>
 

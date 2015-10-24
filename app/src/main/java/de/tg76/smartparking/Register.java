@@ -3,8 +3,6 @@ package de.tg76.smartparking;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,8 +50,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     }
     //Store user data
     private void registerUser(User user){
-        ServerRequests serverRequests = new ServerRequests(this);
-        serverRequests.storeUserDataInBackground(user, new GetUserCallback() {
+        ServerRequestsUser serverRequestsUser = new ServerRequestsUser(this);
+        serverRequestsUser.storeUserDataInBackground(user, new GetUserCallback() {
             @Override
             public void done(User returnedUser) {
                  startActivity(new Intent(Register.this, Login.class));

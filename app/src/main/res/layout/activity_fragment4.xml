@@ -8,18 +8,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="de.tg76.smartparking.Fragment1">
+    tools:context="de.tg76.smartparking.Fragment4">
 
-
-    <Button
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/Fragment4"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Get Data"
-        android:id="@+id/buttonGet" />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView" />
-
+        android:layout_centerInParent="true"
+        android:text="Tab 4"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 </RelativeLayout>
